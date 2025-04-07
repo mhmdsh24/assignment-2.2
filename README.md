@@ -128,6 +128,7 @@ curl -X POST "http://127.0.0.1:8000/image" \
 
 
 ## 📁 Folder Structure
+```
 assignment-2.2/
 ├── .gitignore # gitignore file
 ├── imagefeature.py # image feature endpoint
