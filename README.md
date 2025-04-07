@@ -20,7 +20,7 @@ This project uses `google/vit-base-patch16-224` from Hugging Face to create an i
 
 ```bash
 git clone https://github.com/mhmdsh24/assignment-2.2.git
-cd image-recognition-api
+cd assignment-2.2
 ```
 
 ### 2. Create a Virtual Environment (optional)
@@ -96,9 +96,10 @@ curl -X POST "http://127.0.0.1:8000/predict" \
 ## 🔄 Folder Structure
 
 ```
-image-recognition-api/
-├── main.py                # FastAPI app with endpoint
-├── model.py               # Hugging Face model loading & prediction
+assignment-2.2/
+├── .gitignore             # gitignore file
+├── imagefeature.py        # image feature endpoint
+├── sentimentfeature.py    # sentiment analysis endpoint
 ├── requirements.txt       # Python dependencies
 └── README.md              # Project documentation
 ```
