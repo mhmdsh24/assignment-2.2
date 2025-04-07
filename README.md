@@ -35,12 +35,41 @@ source venv/bin/activate  # or venv\Scripts\activate on Windows
 pip install -r requirements.txt
 ```
 
-### 4. Run the FastAPI Server
+### 4. Run the Feature Scripts
 
-```bash
-uvicorn main:app --reload
-```
+1. **Run Image Feature Script**:
+   ```bash
+   python imagefeature.py
+   ```
 
+2. **Run Sentiment Feature Script**:
+   ```bash
+   python sentimentfeature.py
+   ```
+
+3. **Run the Main FastAPI Server**:
+   ```bash
+   python main.py
+   ```
+
+### 5. Access the FastAPI Interactive Docs
+
+FastAPI provides an interactive API documentation interface that you can use to test the endpoints.
+
+1. **Access the Documentation**:
+   - Start the FastAPI server by running:
+     ```bash
+     uvicorn main:app --reload
+     ```
+   - Open your web browser and go to `http://127.0.0.1:8000/docs`.
+
+2. **Using the Interactive Docs**:
+   - You will see a list of available endpoints.
+   - Click on an endpoint to expand it and see the details.
+   - You can test the endpoints directly from the browser by filling in the required fields and clicking the "Execute" button.
+   - The response will be displayed below the request parameters.
+
+This interface is a convenient way to explore and test the API without needing external tools like Postman or curl.
 ---
 
 ## 📡 API Endpoints
@@ -97,27 +126,13 @@ curl -X POST "http://127.0.0.1:8000/image" \
 
 ---
 
-## 🧪 Testing with FastAPI Interactive Docs
 
-FastAPI provides an interactive API documentation interface that you can use to test the endpoints.
-
-1. **Access the Documentation**:
-   - Start the FastAPI server by running:
-     ```bash
-     uvicorn main:app --reload
-     ```
-   - Open your web browser and go to `http://127.0.0.1:8000/docs`.
-
-2. **Using the Interactive Docs**:
-   - You will see a list of available endpoints.
-   - Click on an endpoint to expand it and see the details.
-   - You can test the endpoints directly from the browser by filling in the required fields and clicking the "Execute" button.
-   - The response will be displayed below the request parameters.
-
-This interface is a convenient way to explore and test the API without needing external tools like Postman or curl.
-
----
-
-## �� Folder Structure
+## 📁 Folder Structure
+assignment-2.2/
+├── .gitignore # gitignore file
+├── imagefeature.py # image feature endpoint
+├── sentimentfeature.py # sentiment analysis endpoint
+├── requirements.txt # Python dependencies
+└── README.md # Project documentation
 
 ```
