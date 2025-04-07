@@ -1,16 +1,15 @@
-# 503N Assignment 2.2: 🖼️ Image Recognition API with FastAPI + Hugging Face ViT
+# Sentiment Analysis & Image Classification API
 
-This project uses `google/vit-base-patch16-224` from Hugging Face to create an image classification API using **FastAPI**. You can send an image file to the API and receive the top predicted labels.
+This project provides an API for sentiment analysis and image classification using FastAPI and Hugging Face models. It includes endpoints for analyzing text sentiment and classifying images.
 
 ---
 
 ## 🚀 Features
 
-- Accepts an image file via POST request
-- Returns the **top 3 predicted class labels**
-- Powered by a pre-trained Vision Transformer (ViT) model from Hugging Face
-- Clean API design using FastAPI
-- GitHub-friendly structure for collaboration
+- **Sentiment Analysis**: Analyze the sentiment of a given text using a pre-trained DistilBERT model.
+- **Image Classification**: Classify images using a Vision Transformer (ViT) model.
+- **FastAPI**: Clean and efficient API design.
+- **Pre-trained Models**: Utilizes models from Hugging Face for high accuracy.
 
 ---
 
@@ -44,72 +43,81 @@ uvicorn main:app --reload
 
 ---
 
-## 📡 API Endpoint
+## 📡 API Endpoints
 
-### `POST /predict`
+### `POST /sentiment`
 
-#### Request:
-
-- Content-Type: `multipart/form-data`
-- Form-data key: `file`
-- Value: Image file (JPG, PNG, etc.)
+- **Description**: Analyze the sentiment of a given text.
+- **Request**:
+  - Content-Type: `application/json`
+  - Body: `{"text": "Your text here"}`
+- **Response**: Sentiment analysis result.
 
 #### Example using `curl`:
 
 ```bash
-curl -X POST "http://127.0.0.1:8000/predict" \
-  -F "file=@path_to_your_image.jpg"
+curl -X POST "http://127.0.0.1:8000/sentiment" \
+  -H "Content-Type: application/json" \
+  -d '{"text": "I love this product!"}'
 ```
 
-#### Example Response:
+### `POST /image`
 
-```json
-{
-  "predictions": [
-    {"label": "tabby cat", "score": 0.8376},
-    {"label": "tiger cat", "score": 0.121},
-    {"label": "Egyptian cat", "score": 0.041}
-  ]
-}
+- **Description**: Classify an uploaded image.
+- **Request**:
+  - Content-Type: `multipart/form-data`
+  - Form-data key: `file`
+  - Value: Image file (JPG, PNG, etc.)
+- **Response**: Predicted label of the image.
+
+#### Example using `curl`:
+
+```bash
+curl -X POST "http://127.0.0.1:8000/image" \
+  -F "file=@path_to_your_image.jpg"
 ```
 
 ---
 
 ## 🧪 Testing with Postman
 
-1. Open Postman and create a **POST** request to:
-   ```
-   http://127.0.0.1:8000/predict
-   ```
+1. **Sentiment Analysis**:
+   - Create a **POST** request to `http://127.0.0.1:8000/sentiment`.
+   - Set the body to raw JSON: `{"text": "Your text here"}`.
+   - Send the request to receive the sentiment analysis.
 
-2. Go to the **Body** tab → Select **form-data**
-
-3. Add a new field:
-   - **Key**: `file`
-   - **Type**: `File`
-   - **Value**: Choose an image from your device
-
-4. Click **Send**. You will get a list of top predictions with confidence scores.
-
----
-
-## 🔄 Folder Structure
-
-```
-assignment-2.2/
-├── .gitignore             # gitignore file
-├── imagefeature.py        # image feature endpoint
-├── sentimentfeature.py    # sentiment analysis endpoint
-├── requirements.txt       # Python dependencies
-└── README.md              # Project documentation
-```
+2. **Image Classification**:
+   - Create a **POST** request to `http://127.0.0.1:8000/image`.
+   - Go to the **Body** tab → Select **form-data**.
+   - Add a new field:
+     - **Key**: `file`
+     - **Type**: `File`
+     - **Value**: Choose an image from your device.
+   - Send the request to receive the image classification.
 
 ---
 
+## 🧪 Testing with FastAPI Interactive Docs
 
+FastAPI provides an interactive API documentation interface that you can use to test the endpoints.
 
-## 📌 Model Info
+1. **Access the Documentation**:
+   - Start the FastAPI server by running:
+     ```bash
+     uvicorn main:app --reload
+     ```
+   - Open your web browser and go to `http://127.0.0.1:8000/docs`.
 
-- Model: `google/vit-base-patch16-224`
-- Dataset: Trained on ImageNet-1k (1,000 classes)
-- Labels: Common everyday objects, animals, tools, foods, and more
+2. **Using the Interactive Docs**:
+   - You will see a list of available endpoints.
+   - Click on an endpoint to expand it and see the details.
+   - You can test the endpoints directly from the browser by filling in the required fields and clicking the "Execute" button.
+   - The response will be displayed below the request parameters.
+
+This interface is a convenient way to explore and test the API without needing external tools like Postman or curl.
+
+---
+
+## �� Folder Structure
+
+```
