@@ -1,15 +1,15 @@
-from fastapi import FastAPI, HTTPException
+# main.py
+from fastapi import FastAPI, HTTPException, APIRouter
 from pydantic import BaseModel
 from transformers import pipeline
 
 class PredictionRequest(BaseModel):
     text: str
 
-app = FastAPI()
-
+router = APIRouter()
 model = pipeline("sentiment-analysis", model="distilbert-base-uncased-finetuned-sst-2-english")
 
-@app.post("/sentiment")
+@router.post("/sentiment")
 async def predict(request: PredictionRequest):
     text = request.text.strip()
     if not text:
